@@ -1,7 +1,7 @@
 var myData = [
-    {"dealId" : 0, "client_name" : "Microsoft", "project_name" : "Apollo Project", "project_manager" : "Mary", "project_cost" : 1000},
-    {"dealId" : 1, "client_name" : "Intel", "project_name" : "Hermes Project", "project_manager" : "Bob", "project_cost" : 10000},
-    {"dealId" : 2, "client_name" : "Apple", "project_name" : "Zeus Project", "project_manager" : "Jane", "project_cost" : 100000}
+    {"dealId" : 0, "client_name" : "Oracle Corp. ", "project_name" : "Apollo Project", "project_manager" : "Mary", "project_cost" : 50000},
+    {"dealId" : 1, "client_name" : "Advanced Micro Devices", "project_name" : "Hermes Project", "project_manager" : "Bob", "project_cost" : 150000000},
+    {"dealId" : 2, "client_name" : "Samsung", "project_name" : "Zeus Project", "project_manager" : "Jane", "project_cost" : 100000}
 ]
 
 
@@ -15,6 +15,8 @@ var currentDealId = myData.length;
 localStorage.setItem("myData", "test")
 
 var myDataTest = localStorage.getItem("myData")
+
+
 
 
 
@@ -54,10 +56,7 @@ function CreateTableFromJSON() {
             var tabCell = tr.insertCell(-1);
             tabCell.innerHTML = myData[i][col[j]];
         }
-        // Insert Extra Cell for the Delete Icon
-        //TODO: Complete this
-        //var tabCell = tr.insertCell(-1);
-        //tabCell.innerHTML = '<button onclick="DeleteRow(' + myData[i].dealId + ')"> <img src="trashcan.png"> </button>'
+        
 
     }
 
@@ -94,13 +93,66 @@ function InsertRow(dealId, clientName, projectName, projectManager, projectCost)
 
 function DeleteRow(dealId) {
      
+    dealId = document.getElementById("dealId").value; 
+
     for( var i = 0; i < myData.length; i++){ 
-    
-        if ( myData[i].dealId === dealId) { 
+
+        if ( myData[i].dealId == dealId) { 
     
             myData.splice(i, 1); 
         }
     
     }
     CreateTableFromJSON();
+}
+
+function EditRow(dealId) {
+
+    dealId = document.getElementById("dealId").value; 
+
+    for( var i = 0; i < myData.length; i++){ 
+
+        if ( myData[i].dealId == dealId) {
+            
+            //var newId = document.getElementById("dealId").value; 
+            var clientName = document.getElementById("clientNameInput1").value;
+            var projectName = document.getElementById("projectNameInput1").value;
+            var projectManager = document.getElementById("projectManagerInput1").value;
+            var projectCost = document.getElementById("projectCostInput1").value;
+
+           // document.getElementById("dealId").value = " "; 
+            document.getElementById("clientNameInput1").value = "";
+            document.getElementById("projectNameInput1").value = "";
+            document.getElementById("projectManagerInput1").value = "";
+            document.getElementById("projectCostInput1").value = "";
+
+            myData.splice(dealId, 1, {"client_name" : clientName, "project_name" : projectName, "project_manager" : projectManager, "project_cost" : projectCost}); 
+             
+        }
+    }
+    CreateTableFromJSON();
+}
+
+
+
+function EditCost(dealId) { 
+
+    dealId = document.getElementById("dealId").value; 
+
+    for( var i = 0; i < myData.length; i++){ 
+
+        if ( myData[i].dealId == dealId) {
+
+            var projectCost = document.getElementById("projectCostInput").value;
+            document.getElementById("projectCostInput").value = "";
+
+            myData.splice(dealId, 1, {"project_cost" : projectCost}); 
+
+
+        }
+
+
+    }
+
+    CreateTableFromJSON(); 
 }

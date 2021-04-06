@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Deals</title>
+    <title>Project Manager Portal</title>
     <style>
         th, td, p, input {
             font:14px Verdana;
@@ -17,12 +17,14 @@
             font-weight:bold;
         }
     </style>
-    <script src="create_table.js"></script>
-
-
+    <script src="tablescript.js"></script>
 
 </head>
+
+ 
+<h1>Project Manager Portal</h1>
 <body onload="CreateTableFromJSON()">
+
     <p id="showData"></p>
     <H3>Add New Deal</H3>
     <p id="newData"> 
@@ -32,5 +34,23 @@
         <label>Project Cost</label><input type="number" id="projectCostInput" /><br />
     </p>
     <input type="button" onclick="AddNewDeal()" value="Save" />
+
+    <h3>Delete Deal</h3>
+        <label>Deal ID:</label><input type="number" id="dealId" /><br> <br>
+
+        <input type="button" onclick= "DeleteRow()" value="Delete Deal"/>
+    
+    <h3>Edit Deal</h3>
+        <p>**Have to replace all 4 elements of a row in order for it to apply.**</p> <br>
+        <label>Deal ID:</label><input type="number" id="dealId" /> <br><br>
+
+        <label>Client Name</label><input type="text" id="clientNameInput1" /><br />
+        <label>Project Name</label><input type="text" id="projectNameInput1" /><br />
+        <label>Project Manager</label><input type="text" id="projectManagerInput1" /><br />
+        <label>Project Cost</label><input type="number" id="projectCostInput1" /><br /> <br>
+
+        <input type="button" onclick="EditRow()" value="Edit Deal" /> 
     
 </body>
+
+</html>
